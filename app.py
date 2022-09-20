@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from crypt import methods
 from unittest import result
 from flask import Flask, request, render_template
