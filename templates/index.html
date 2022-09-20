@@ -6,32 +6,49 @@
     <title>Genre Classifier</title>
     <link rel="stylesheet" type="text/css"
     href="{{ url_for('static', filename='main.css') }}"/>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Genre Classifier Demo</h1>
+
     <form method="post" action="{{ url_for('predict') }}" id="classification_form">
-        <label for="Description">Description:</label>
-        <br/>
-        <textarea name="Description" id="Description">{{text}}</textarea>
-        <br/>
-        <label for="Classifier">Select Classifier</label>
-        <br/>
-        <select id="Classifier" name="Classifier">
-            <option value="svc">Support Vector</option>
-            <option value="lgb">LGBM</option>
-            <option value="lstm">LSTM</option>
-        </select>
-        <br/>
-        <input type="submit" value="Submit"/>
-        <input type="reset"  value="RESET" style="color: red;"/>
+        <i class="fa-solid fa-check"></i>
+        <div class="login">
+            <h3 class="text-center">Genre Classifier</h3><br>
+            <div class="form-outline">
+                <label class="form-label" for="textAreaExample">Description</label>
+                <textarea class="form-control" id="textAreaExample" rows="3" name="Description">{{text}}</textarea>
+    
+            </div><br>
+            <label class="form-label">Select Classifier</label>
+            <select class="form-select mb-3" name="Classifier" aria-label="Default select example">
+                <option {{selected_svc}} value="svc">Support Vector Machine</option>
+                <option {{selected_lgb}} value="lgb">LGBM</option>
+                <option {{selected_lstm}} value="lstm">LSTM</option>
+            </select>
+            <label class="pred">Prediction: </label>
+            <span style="color: red;">{{result}}</span>
+            <br>
+    
+            <div class="original">
+                <input class="btn btn-primary w-40" type="submit" value="Submit" style="margin-right:2rem">
+                <input class="btn btn-danger w-40" type="reset" value="Reset">
+            </div>
     </form>
-    {% if prediction_success == True %}
+</div>
+    <!-- {% if prediction_success == True %}
         <br/>
         <p>Prediction: {{result}}</p>
     {% endif %}
     {% if prediction_success == False %}
         <br/>
         <p>{{error}}</p>
-    {% endif %}
+    {% endif %} -->
 </body>
 </html>

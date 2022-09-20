@@ -75,7 +75,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return render_template('index.html', selected_svc = 'selected')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -83,6 +83,9 @@ def predict():
     error = None
     result = None
     clf=None
+    selected_svc = ''
+    selected_lgb = ''
+    selected_lstm = ''
 
     text = request.form['Description']
     classifier = request.form['Classifier']
@@ -93,12 +96,18 @@ def predict():
         ipText = pd.Series([cleanedText])
         pred = clf.predict(ipText)
         result = pred[0]
+        selected_svc = 'selected'
+        selected_lgb = ''
+        selected_lstm = ''
     elif classifier == 'lgb':
         clf = lgb_clf
         cleanedText = text_cleaner(text)
         ipText = pd.Series([cleanedText])
         pred = clf.predict(ipText)
         result = pred[0]
+        selected_lgb = 'selected'
+        selected_svc = ''
+        selected_lstm = ''
     elif classifier == 'lstm':
         cleanedText = text_cleaner(text)
         ipText = pd.Series([cleanedText])
@@ -107,9 +116,12 @@ def predict():
         pred = model.predict(ip)
         res = np.argmax(pred,axis=1)
         result = labels[res[0]]
+        selected_lgb = ''
+        selected_svc = ''
+        selected_lstm = 'selected'
 
 
-    return render_template('index.html', result = result, text = text, prediction_success = True)
+    return render_template('index.html', result = result, text = text, prediction_success = True, selected_lgb = selected_lgb,  selected_lstm = selected_lstm, selected_svc = selected_svc)
 
 
 if __name__ == '__main__':
