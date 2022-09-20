@@ -1,0 +1,8 @@
+Flask==2.2.2
+scikit-learn
+joblib
+nltk
+tensorflow
+pandas
+numpy
+lightgbm
