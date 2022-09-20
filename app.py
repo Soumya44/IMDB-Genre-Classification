@@ -124,5 +124,5 @@ def predict():
     return render_template('index.html', result = result, text = text, prediction_success = True, selected_lgb = selected_lgb,  selected_lstm = selected_lstm, selected_svc = selected_svc)
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=3000, debug=True)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=3000, debug=True)

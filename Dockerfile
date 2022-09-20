@@ -12,4 +12,6 @@ RUN python -m nltk.downloader all
 
 EXPOSE 3000
 
-CMD [ "python", "app.py" ]
+RUN ["chmod", "+x", "gunicorn_starter.sh"]
+
+ENTRYPOINT ["./gunicorn_starter.sh"]
